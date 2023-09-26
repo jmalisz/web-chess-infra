@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-main-service-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    app: front-main
+  ports:
+    - name: front-main
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

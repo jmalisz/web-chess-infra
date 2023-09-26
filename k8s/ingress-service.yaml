@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  labels:
+    name: ingress-service
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: web-chess.com
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: front-main-service-cluster-ip
+                port:
+                  number: 3000
+          - path: "/api/websocket"
+            pathType: Prefix
+            backend:
+              service:
+                name: back-websocket-service-cluster-ip
+                port:
+                  number: 3000

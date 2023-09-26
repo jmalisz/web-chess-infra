@@ -1,0 +1,32 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+manifests:
+  rawYaml:
+    - "k8s/*.yaml"
+deploy:
+  kubectl: {}
+build:
+  local:
+    push: false
+  artifacts:
+    - image: jmalisz/web-chess-front-main
+      context: "../web-chess-front-main"
+      docker:
+        dockerfile: Dockerfile
+        buildArgs:
+          NODE_VERSION: 18.17.0
+      # Better performance, but requires a separate Dockerfile with command that will perform HMR
+      # sync:
+      #   manual:
+      #     - src: "src/**/*.{html,css,ts,tsx}"
+      #       dest: .
+    - image: jmalisz/web-chess-back-websocket
+      context: "../web-chess-back-websocket"
+      docker:
+        dockerfile: Dockerfile
+        buildArgs:
+          NODE_VERSION: 18.17.0
+      # sync:
+      #   manual:
+      #     - src: "src/**/*.ts"
+      #       dest: .

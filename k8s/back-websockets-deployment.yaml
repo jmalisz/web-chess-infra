@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-websocket-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-websocket
+  template:
+    metadata:
+      labels:
+        app: back-websocket
+    spec:
+      containers:
+        - name: back-websocket
+          image: jmalisz/web-chess-back-websocket
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

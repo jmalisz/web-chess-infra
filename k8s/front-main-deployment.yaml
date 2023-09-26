@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-main-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-main
+  template:
+    metadata:
+      labels:
+        app: front-main
+    spec:
+      containers:
+        - name: front-main
+          image: jmalisz/web-chess-front-main
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

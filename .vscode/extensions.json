@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    // Linting
+    "streetsidesoftware.code-spell-checker",
+    // Formating
+    "editorconfig.editorconfig",
+    "redhat.vscode-yaml",
+    "tyriar.sort-lines",
+    // Visual information
+    "aaron-bond.better-comments",
+    "gruntfuggly.todo-tree",
+    "vscode-icons-team.vscode-icons",
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    // Remote/pair work
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.vscode-remote-extensionpack",
+    "ms-vsliveshare.vsliveshare"
+  ]
+}
