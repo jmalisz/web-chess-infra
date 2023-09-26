@@ -14,7 +14,8 @@ Dependencies:
 - Ingress Nginx: <https://kubernetes.github.io/ingress-nginx/>
 - Skaffold: <https://skaffold.dev/>
 
-The whole local cluster should be managed through skaffold. If properly configured, it will automatically provision and delete everything. 
-Skaffold yaml expects microservices local repositories to be place in the same folder as infra. Skaffold will also tail logs from all services.
+The whole local cluster should be managed through skaffold. If properly configured, it will automatically provision and delete everything. Skaffold will also tail logs from all services.
+
+Skaffold yaml expects microservices local repositories to be place in the same folder as infra.
 
 Use `skaffold dev` for starting the local K8S cluster.
