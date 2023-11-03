@@ -2,7 +2,9 @@
 
 This is repository for infra of Web-Chess.
 
-Defines microservices K8S structure.
+Defines GCP resources and K8S structure.
+
+Available in only one region to reduce costs.
 
 ## Development
 
@@ -19,3 +21,7 @@ The whole local cluster should be managed through skaffold. If properly configur
 Skaffold yaml expects microservices local repositories to be place in the same folder as infra.
 
 Use `skaffold dev` for starting the local K8S cluster.
+
+## Production
+
+Repository is connected to <https://spacelift.io/>, which executes the infrastructure changes based on PRs.
