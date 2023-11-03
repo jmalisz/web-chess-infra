@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-websocket-redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-websocket-redis
+  template:
+    metadata:
+      labels:
+        app: back-websocket-redis
+    spec:
+      containers:
+        - name: back-websocket-redis
+          image: redis/redis-stack
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
