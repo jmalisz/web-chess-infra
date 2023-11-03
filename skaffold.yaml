@@ -3,6 +3,7 @@ kind: Config
 manifests:
   rawYaml:
     - "k8s/*.yaml"
+    - "k8s-dev/*.yaml"
 deploy:
   kubectl: {}
 build:

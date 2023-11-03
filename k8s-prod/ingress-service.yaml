@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  labels:
+    name: ingress-service
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - www.web-chess.xyz
+      secretName: web-chess-tls
+  rules:
+    - host: www.web-chess.xyz
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: front-main-service-cluster-ip
+                port:
+                  number: 3000
+          - path: "/api/websocket"
+            pathType: Prefix
+            backend:
+              service:
+                name: back-websocket-service-cluster-ip
+                port:
+                  number: 3000
