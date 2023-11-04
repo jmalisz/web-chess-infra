@@ -6,6 +6,10 @@ metadata:
     name: ingress-service
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - web-chess.com
+      secretName: web-chess-tls
   rules:
     - host: web-chess.com
       http:
