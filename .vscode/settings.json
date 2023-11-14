@@ -6,5 +6,8 @@
   "yaml.schemas": {
     "kubernetes": "k8s/*.yaml",
     "https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs-v2/content/en/schemas/v3.json": "file:///home/jmalisz/Projects/web-chess-infra/skaffold-dev.yaml"
+  },
+  "vs-kubernetes": {
+    "disable-linters": ["resource-limits"]
   }
 }

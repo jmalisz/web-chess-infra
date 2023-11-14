@@ -16,6 +16,8 @@ spec:
         - name: back-websocket-redis
           image: redis/redis-stack
           resources:
+            requests:
+              memory: 2Gi
+              cpu: 500m
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: 2Gi
