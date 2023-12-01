@@ -14,6 +14,7 @@ Dependencies:
   - Docker: <https://www.docker.com/products/kubernetes/>
   - minikube: <https://minikube.sigs.k8s.io/docs/start/>
 - Ingress Nginx: <https://kubernetes.github.io/ingress-nginx/>
+- NATS: <https://github.com/nats-io/k8s/tree/main/helm/charts/nats>
 - Skaffold: <https://skaffold.dev/>
 
 The whole local cluster should be managed through skaffold. If properly configured, it will automatically provision and delete everything. Skaffold will also tail logs from all services.
