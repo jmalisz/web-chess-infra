@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-agent-stockfish-service-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    app: back-agent-stockfish
+  ports:
+    - name: back-agent-stockfish
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

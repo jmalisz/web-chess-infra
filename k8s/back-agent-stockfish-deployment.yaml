@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-agent-stockfish-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-agent-stockfish
+  template:
+    metadata:
+      labels:
+        app: back-agent-stockfish
+    spec:
+      containers:
+        - name: back-agent-stockfish
+          image: jmalisz/web-chess-back-agent-stockfish
+          resources:
+            requests:
+              memory: 1024Mi
+              cpu: "1"
+            limits:
+              memory: 1024Mi

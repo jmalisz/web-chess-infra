@@ -28,3 +28,10 @@ spec:
                 name: back-websocket-service-cluster-ip
                 port:
                   number: 3000
+          - path: "/api/agent/stockfish"
+            pathType: Prefix
+            backend:
+              service:
+                name: back-agent-stockfish-service-cluster-ip
+                port:
+                  number: 3000
