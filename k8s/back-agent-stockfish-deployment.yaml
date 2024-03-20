@@ -17,7 +17,7 @@ spec:
           image: jmalisz/web-chess-back-agent-stockfish
           resources:
             requests:
-              memory: 1024Mi
-              cpu: "1"
+              memory: 2048Mi
+              cpu: "2"
             limits:
-              memory: 1024Mi
+              memory: 2048Mi
