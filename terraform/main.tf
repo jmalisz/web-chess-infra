@@ -145,13 +145,10 @@ resource "helm_release" "certificate_manager" {
 }
 
 resource "helm_release" "nats" {
-  name = module.label.namespace
+  name = "nats"
 
   repository = "https://nats-io.github.io/k8s/helm/charts/"
   chart      = "nats"
-  namespace  = "nats"
   version    = "1.1.12"
-
-  create_namespace = true
 }
 
