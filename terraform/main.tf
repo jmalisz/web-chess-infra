@@ -1,5 +1,5 @@
 provider "google" {
-  project = "web-chess-402721"
+  project = "web-chess-425815"
   region  = "europe-central2"
 }
 
@@ -23,38 +23,68 @@ resource "google_compute_address" "default" {
 }
 
 resource "google_dns_managed_zone" "default" {
-  name     = module.label.id
+  name = module.label.id
+
   dns_name = "${var.domain}."
 }
 
 resource "google_dns_record_set" "a" {
-  managed_zone = google_dns_managed_zone.default.name
-
   name = google_dns_managed_zone.default.dns_name
-  type = "A"
-  ttl  = 30
+
+  managed_zone = google_dns_managed_zone.default.name
+  type         = "A"
+  ttl          = 30
 
   rrdatas = [google_compute_address.default.address]
 }
 
 resource "google_dns_record_set" "cname" {
-  managed_zone = google_dns_managed_zone.default.name
-
   name = join(".", compact(["www", google_dns_record_set.a.name]))
-  type = "CNAME"
-  ttl  = 30
+
+  managed_zone = google_dns_managed_zone.default.name
+  type         = "CNAME"
+  ttl          = 30
 
   rrdatas = [google_dns_record_set.a.name]
 }
 
 resource "google_container_cluster" "default" {
-  name     = module.label.id
-  location = module.label.environment
+  name = module.label.id
 
-  deletion_protection = false
-  enable_autopilot    = true
+  location                 = module.label.environment
+  node_locations           = ["${module.label.environment}-a"]
+  deletion_protection      = false
+  remove_default_node_pool = true
+  initial_node_count       = 1
 
   ip_allocation_policy {}
+}
+
+resource "google_container_node_pool" "default" {
+  name    = module.label.id
+  cluster = google_container_cluster.default.id
+
+  node_config {
+    preemptible  = true
+    machine_type = "e2-medium"
+    disk_size_gb = 50
+  }
+
+  autoscaling {
+    min_node_count = 0
+    max_node_count = 10
+  }
+
+  lifecycle {
+    ignore_changes = [
+      initial_node_count,
+      node_count,
+      node_config,
+      node_locations
+    ]
+  }
+
+  depends_on = [google_container_cluster.default]
 }
 
 # Configure kubernetes provider with Oauth2 access token.
@@ -80,6 +110,7 @@ resource "helm_release" "ingress_nginx" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
   namespace  = "ingress-nginx"
+  version    = "4.10.1"
 
   create_namespace = true
 
@@ -95,6 +126,7 @@ resource "helm_release" "certificate_manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   namespace  = "cert-manager"
+  version    = "1.14.5"
 
   create_namespace = true
 
@@ -110,5 +142,16 @@ resource "helm_release" "certificate_manager" {
     name  = "installCRDs"
     value = "true"
   }
+}
+
+resource "helm_release" "nats" {
+  name = module.label.namespace
+
+  repository = "https://nats-io.github.io/k8s/helm/charts/"
+  chart      = "nats"
+  namespace  = "nats"
+  version    = "1.1.12"
+
+  create_namespace = true
 }
 

@@ -35,3 +35,10 @@ spec:
                 name: back-agent-stockfish-service-cluster-ip
                 port:
                   number: 3000
+          - path: "/api/agent/neural"
+            pathType: Prefix
+            backend:
+              service:
+                name: back-agent-neural-service-cluster-ip
+                port:
+                  number: 3000

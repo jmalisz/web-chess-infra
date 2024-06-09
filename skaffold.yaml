@@ -41,3 +41,13 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: jmalisz/web-chess-back-agent-neural
+      context: "../web-chess-back-agent-neural"
+      docker:
+        dockerfile: Dockerfile.local
+        buildArgs:
+          NODE_VERSION: 18.17.0
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: back-agent-stockfish-deployment
+  name: back-agent-neural-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: back-agent-stockfish
+      app: back-agent-neural
   template:
     metadata:
       labels:
-        app: back-agent-stockfish
+        app: back-agent-neural
     spec:
       containers:
-        - name: back-agent-stockfish
-          image: jmalisz/web-chess-back-agent-stockfish
+        - name: back-agent-neural
+          image: jmalisz/web-chess-back-agent-neural
           resources:
             requests:
               memory: 2Gi

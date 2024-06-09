@@ -17,7 +17,7 @@ spec:
           image: jmalisz/web-chess-back-websocket
           resources:
             requests:
-              memory: 1024Mi
-              cpu: "1"
+              memory: 2Gi
+              cpu: 250m
             limits:
-              memory: 1024Mi
+              memory: 2Gi
