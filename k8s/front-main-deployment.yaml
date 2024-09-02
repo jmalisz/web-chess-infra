@@ -17,7 +17,7 @@ spec:
           image: jmalisz/web-chess-front-main
           resources:
             requests:
-              memory: 512Mi
+              memory: 1Gi
               cpu: 250m
             limits:
-              memory: 1024Mi
+              memory: 1Gi
